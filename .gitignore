@@ -1,0 +1,34 @@
+# Скомпилированные бинарные файлы
+*.exe
+*.out
+*.o
+*.obj
+*.dll
+*.so
+*.a
+*.lib
+
+# Файлы сборки и временные файлы
+*.log
+*.tmp
+*.bak
+
+# Каталоги сборки
+/build/
+/bin/
+/Debug/
+/Release/
+**/bin/
+**/obj/
+**/build/
+**/out/
+
+# Файлы среды разработки
+.vscode/
+.idea/
+*.swp
+
+# Кэш и временные файлы
+*.cache
+*.DS_Store
+Thumbs.db

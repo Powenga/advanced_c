@@ -1,0 +1,5 @@
+BasedOnStyle: LLVM
+Language: C
+PointerAlignment: Right
+DerivePointerAlignment: false
+AllowShortFunctionsOnASingleLine: None

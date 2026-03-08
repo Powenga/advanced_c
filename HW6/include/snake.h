@@ -33,13 +33,13 @@ typedef struct Tail {
   int y;
 } Tail;
 
-void initHead(struct Snake *head, int x, int y);
-void initTail(struct Tail *t, int head_x, int head_y, size_t size);
-void initSnake(struct Snake *snake, size_t size, int x, int y,
-               struct ControlButtons *controls);
+void initHead(Snake *head, int x, int y);
+void initTail(Tail *t, int head_x, int head_y, size_t size);
+void initSnake(Snake *snake, size_t size, int x, int y,
+               ControlButtons *controls);
 int check_self_collision(Snake *snake);
-int checkDirection(struct Snake *snake, int intention);
-void addTail(struct Snake *head);
-void update_snake(struct Snake *snake);
+int checkDirection(Snake *snake, int intention);
+void addTail(Snake *head);
+void update_snake(Snake *snake);
 
 #endif

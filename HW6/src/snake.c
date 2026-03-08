@@ -4,13 +4,13 @@
 
 #define MAX_TAIL_SIZE 100
 
-void initHead(struct Snake *head, int x, int y) {
+void initHead(Snake *head, int x, int y) {
   head->x = x;
   head->y = y;
   head->direction = RIGHT;
 }
 
-void initTail(struct Tail *t, int head_x, int head_y, size_t size) {
+void initTail(Tail *t, int head_x, int head_y, size_t size) {
   for (size_t i = 0; i < size; i++) {
     t[i].x = head_x - (int)i - 1;
     t[i].y = head_y;
@@ -54,8 +54,8 @@ int checkDirection(Snake *snake, int intention) {
 /*
  Увеличение хвоста на 1 элемент
  */
-void addTail(struct Snake *head) {
-  //...нужно написать код...//
+void addTail(Snake *snake) {
+  snake->tsize++;
 }
 
 void update_snake(Snake *snake) {

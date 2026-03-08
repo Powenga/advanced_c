@@ -8,6 +8,7 @@
 
 #define MAX_FOOD_SIZE 20
 #define FOOD_EXPIRE_SECONDS 10
+#define SEED_NUMBER 3
 
 /*
  Food

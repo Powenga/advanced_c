@@ -15,12 +15,7 @@
 
 const double FRAME_MS = 1000. / FPS;
 
-struct ControlButtons default_controls[CONTROLS] = {
-    {KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT},
-    {'S', 'W', 'A', 'D'},
-    {'s', 'w', 'a', 'd'}};
-
-void draw(Snake *snake) {
+void draw_snake(Snake *snake) {
   char head_symbol = '@';
   char tail_symbol = '*';
   // Crear screen
@@ -38,6 +33,9 @@ void draw(Snake *snake) {
   }
 }
 
+void draw_seads() {
+}
+
 void draw_game_over() {
   timeout(-1);
   mvprintw(0, 0, "Game Over. Press any button to exit");
@@ -46,7 +44,16 @@ void draw_game_over() {
 
 int main() {
   Snake *snake = (Snake *)malloc(sizeof(Snake));
+  struct Food food[MAX_FOOD_SIZE];
+
+  struct ControlButtons default_controls[CONTROLS] = {
+      {KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT},
+      {'S', 'W', 'A', 'D'},
+      {'s', 'w', 'a', 'd'}};
+
   initSnake(snake, START_TAIL_SIZE, 10, 10, default_controls);
+  initFood(food, MAX_FOOD_SIZE);
+  putFood(food, SEED_NUMBER); // Кладем зерна
   initscr();
   keypad(stdscr, TRUE); // Включаем F1, F2, стрелки и т.д.
   raw();                // Откдючаем line buffering
@@ -54,7 +61,7 @@ int main() {
   curs_set(FALSE);      // Отключаем курсор
 
   // Start screen with snake
-  draw(snake);
+  draw_snake(snake);
   getch(); // Wait for start;
 
   timeout(0); // Отключаем таймаут после нажатия клавиши в цикле
@@ -65,12 +72,13 @@ int main() {
     key_pressed = getch(); // Считываем клавишу
     input(snake, key_pressed);
     update_snake(snake);
-    draw(snake);
+    draw_snake(snake);
 
     if (check_self_collision(snake)) {
       draw_game_over();
       break;
     }
+    refreshFood(food, SEED_NUMBER);
 
     refresh();
     clock_t frame_end = clock();

@@ -28,13 +28,13 @@ void putFoodSeed(Food *fp) {
 /*
  Разместить еду на поле
  */
-void putFood(struct Food f[], size_t number_seeds) {
+void putFood(Food f[], size_t number_seeds) {
   for (size_t i = 0; i < number_seeds; i++) {
     putFoodSeed(&f[i]);
   }
 }
 
-void refreshFood(struct Food f[], int nfood) {
+void refreshFood(Food f[], int nfood) {
   for (size_t i = 0; i < nfood; i++) {
     if (f[i].put_time) {
       if (!f[i].enable || (time(NULL) - f[i].put_time) > FOOD_EXPIRE_SECONDS) {
@@ -44,7 +44,7 @@ void refreshFood(struct Food f[], int nfood) {
   }
 }
 
-void repairSeed(struct Food f[], size_t nfood, struct Snake *snake) {
+void repairSeed(Food f[], size_t nfood, Snake *snake) {
   for (size_t i = 0; i < snake->tsize; i++)
     for (size_t j = 0; j < nfood; j++) {
       /* Если хвост совпадает с зерном */
@@ -58,7 +58,7 @@ void repairSeed(struct Food f[], size_t nfood, struct Snake *snake) {
 }
 
 // Проверка того, является ли какое-то из зерен съеденным,
-int haveEat(struct Snake *head, struct Food f[]) {
+int haveEat(Snake *head, Food f[]) {
   //...нужно написать код...//
   return 0;
 }

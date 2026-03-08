@@ -81,7 +81,9 @@ int main() {
   timeout(0); // Отключаем таймаут после нажатия клавиши в цикле
 
   int key_pressed = 0;
-  while (key_pressed != STOP_GAME) {
+  int game_over = 0;
+
+  while (key_pressed != STOP_GAME && !game_over) {
     clock_t frame_start = clock();
     key_pressed = getch(); // Считываем клавишу
 
@@ -89,7 +91,7 @@ int main() {
       input(snakes[i], key_pressed);
       update_snake(snakes[i]);
       if (check_self_collision(snakes[i])) {
-        draw_game_over();
+        game_over = 1;
         break;
       }
       if (haveEat(snakes[i], food, SEED_NUMBER)) {
@@ -97,6 +99,11 @@ int main() {
       }
 
       repairSeed(food, SEED_NUMBER, snakes[i]);
+    }
+
+    if (game_over) {
+      draw_game_over();
+      break;
     }
 
     draw(snakes, food);

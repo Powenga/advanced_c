@@ -1,7 +1,7 @@
 # Компилятор и флаги
 CC = gcc
 CFLAGS = -fdiagnostics-color=always -Wall -Wextra -g -Iinclude 
-LDFLAGS = -lncurses -DNCURSES_STATIC 
+LDFLAGS = -lncursesw 
 
 # Папки
 SRC = src
@@ -13,8 +13,7 @@ INCLUDE = include
 TARGET = $(BIN)/app
 
 # Список исходников
-# SRCS = $(SRC)/main.c $(SRC)/utils.c $(SRC)/temp_functions.c $(SRC)/cli.c $(SRC)/file_reader.c
-SRCS = $(SRC)/main.c
+SRCS = $(SRC)/main.c $(SRC)/food.c $(SRC)/snake.c $(SRC)/controls.c
 OBJS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(SRCS))
 
 # Определяем ОС
@@ -38,7 +37,7 @@ $(BIN):
 
 # Сборка приложения
 $(TARGET): $(OBJS) | $(BIN)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(TARGET) 
 
 # Компиляция объектов
 $(OBJ)/%.o: $(SRC)/%.c | $(OBJ)

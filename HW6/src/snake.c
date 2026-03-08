@@ -18,7 +18,7 @@ void initTail(Tail *t, int head_x, int head_y, size_t size) {
 }
 
 void initSnake(Snake *snake, size_t size, int x, int y,
-               ControlButtons *controls) {
+               ControlButtons controls) {
   Tail *tail = malloc(MAX_TAIL_SIZE * sizeof(Tail));
   initHead(snake, x, y);
   initTail(tail, x, y, MAX_TAIL_SIZE);

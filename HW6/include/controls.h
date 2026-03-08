@@ -2,7 +2,6 @@
 #define CONTROLS_H
 
 #include <ncurses/ncurses.h>
-#include <snake.h>
 
 #define CONTROLS 3
 

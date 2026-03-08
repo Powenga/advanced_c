@@ -23,7 +23,7 @@ typedef struct Snake {
   int direction;
   size_t tsize;
   struct Tail *tail;
-  struct ControlButtons *controls;
+  struct ControlButtons controls;
 } Snake;
 
 // Tail segment
@@ -36,7 +36,7 @@ typedef struct Tail {
 void initHead(Snake *head, int x, int y);
 void initTail(Tail *t, int head_x, int head_y, size_t size);
 void initSnake(Snake *snake, size_t size, int x, int y,
-               ControlButtons *controls);
+               struct ControlButtons controls);
 int check_self_collision(Snake *snake);
 int checkDirection(Snake *snake, int intention);
 void addTail(Snake *head);

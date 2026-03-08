@@ -24,8 +24,8 @@ typedef struct Food {
 void initFood(Food f[], size_t size);
 void putFoodSeed(Food *fp);
 void putFood(Food f[], size_t number_seeds);
-void refreshFood(Food f[], int nfood);
+void refreshFood(Food f[], size_t nfood);
 void repairSeed(Food f[], size_t nfood, Snake *snake);
-int haveEat(Snake *head, Food f[]);
+int haveEat(Snake *snake, Food food[], size_t food_number);
 
 #endif

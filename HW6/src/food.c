@@ -13,16 +13,11 @@ void initFood(Food f[], size_t size) {
  */
 void putFoodSeed(Food *fp) {
   int max_x = 0, max_y = 0;
-  char spoint[2] = {0};
   getmaxyx(stdscr, max_y, max_x);
-  mvprintw(fp->y, fp->x, " ");
   fp->x = rand() % (max_x - 1);
   fp->y = rand() % (max_y - 2) + 1; // Не занимаем верхнюю строку
   fp->put_time = time(NULL);
-  fp->point = '$';
   fp->enable = 1;
-  spoint[0] = fp->point;
-  mvprintw(fp->y, fp->x, "%s", spoint);
 }
 
 /*
@@ -34,7 +29,7 @@ void putFood(Food f[], size_t number_seeds) {
   }
 }
 
-void refreshFood(Food f[], int nfood) {
+void refreshFood(Food f[], size_t nfood) {
   for (size_t i = 0; i < nfood; i++) {
     if (f[i].put_time) {
       if (!f[i].enable || (time(NULL) - f[i].put_time) > FOOD_EXPIRE_SECONDS) {
@@ -44,21 +39,33 @@ void refreshFood(Food f[], int nfood) {
   }
 }
 
-void repairSeed(Food f[], size_t nfood, Snake *snake) {
+void repairSeed(Food food[], size_t food_count, Snake *snake) {
   for (size_t i = 0; i < snake->tsize; i++)
-    for (size_t j = 0; j < nfood; j++) {
-      /* Если хвост совпадает с зерном */
-      //...нужно написать код...//
+    for (size_t j = 0; j < food_count; j++) {
+
+      if (snake->tail[i].x == food[j].x && snake->tail[i].y == food[j].y) {
+        putFoodSeed(&food[j]);
+      }
     }
-  for (size_t i = 0; i < nfood; i++)
-    for (size_t j = 0; j < nfood; j++) {
-      /* Если два зерна на одной точке */
-      //...нужно написать код...//
+  for (size_t i = 0; i < food_count; i++)
+    for (size_t j = 0; j < food_count; j++) {
+      if (i == j) {
+        continue;
+      }
+      if (food[i].x == food[j].x && food[i].y == food[j].y) {
+        putFoodSeed(&food[j]);
+      }
     }
 }
 
 // Проверка того, является ли какое-то из зерен съеденным,
-int haveEat(Snake *head, Food f[]) {
-  //...нужно написать код...//
+int haveEat(Snake *snake, Food food[], size_t food_number) {
+  for (size_t i = 0; i < food_number; i++) {
+    if (snake->x == food[i].x && snake->y == food[i].y) {
+      food[i].enable = 0;
+      return 1;
+    }
+  }
+
   return 0;
 }

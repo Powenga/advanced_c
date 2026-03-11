@@ -10,11 +10,12 @@ int parse_cli(int argc, char *argv[], CliOptions *options) {
   options->show_interation_count = 0;
   options->show_intersection_dots = 0;
   options->show_help = 0;
+  options->test = 0;
 
   int result; // arguments
   opterr = 0; // hide error messsage
 
-  while ((result = getopt(argc, argv, "hid")) != -1) {
+  while ((result = getopt(argc, argv, "hidt")) != -1) {
     switch (result) {
     case 'h':
       options->show_help = 1;
@@ -24,6 +25,9 @@ int parse_cli(int argc, char *argv[], CliOptions *options) {
       break;
     case 'd':
       options->show_intersection_dots = 1;
+      break;
+    case 't':
+      options->test = 1;
       break;
     case '?':
       return 0;
@@ -44,4 +48,5 @@ void print_help(char *prog) {
   printf("\t-h - Help text;  \n");
   printf("\t-d - Show intersection dots\n");
   printf("\t-i - Show iteraction count\n");
+  printf("\t-t - Run tests\n");
 }

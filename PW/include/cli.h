@@ -7,6 +7,7 @@ typedef struct {
   uint8_t show_interation_count;
   uint8_t show_intersection_dots;
   uint8_t show_help;
+  uint8_t test;
 } CliOptions;
 
 int parse_cli(int argc, char *argv[], CliOptions *options);

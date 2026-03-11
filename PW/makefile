@@ -13,7 +13,7 @@ INCLUDE = include
 TARGET = $(BIN)/app
 
 # Список исходников
-SRCS = $(SRC)/main.c $(SRC)/roots.c $(SRC)/integrals.c
+SRCS = $(SRC)/main.c $(SRC)/roots.c $(SRC)/integrals.c $(SRC)/cli.c
 OBJS = $(patsubst $(SRC)/%.c,$(OBJ)/%.o,$(SRCS))
 
 # Определяем ОС

@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
   // f3
   float area3 = integral_trapzoid(f3, root_1_3, root_2_3, INTEGRAL_COUNT);
 
-  printf("\nArea: %.5f\n", area1 - area2 - area3);
+  printf("\nArea: %.5f\n\n", area1 - area2 - area3);
 
   return 0;
 }

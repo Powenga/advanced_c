@@ -20,10 +20,10 @@ int parse_cli(int argc, char *argv[], CliOptions *options) {
       options->show_help = 1;
       break;
     case 'i':
-      options->show_intersection_dots = 1;
+      options->show_interation_count = 1;
       break;
     case 'd':
-      options->show_intersection_dots = 0;
+      options->show_intersection_dots = 1;
       break;
     case '?':
       return 0;
@@ -39,9 +39,9 @@ void print_cli_usage(const char *prog) {
 }
 
 void print_help(char *prog) {
-  printf("Calculate area of three fucntions.\n");
+  printf("Calculate area of three functions.\n");
   printf("Usage: %s -h -d -i.\n", prog);
   printf("\t-h - Help text;  \n");
-  printf("\t-d - Show intersection dots");
-  printf("\t-i - Show iteraction count");
+  printf("\t-d - Show intersection dots\n");
+  printf("\t-i - Show iteraction count\n");
 }

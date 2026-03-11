@@ -17,8 +17,6 @@ float f3(float x) {
   return 3 / x;
 }
 
-float integral(function f, float a, float b, float eps);
-
 int main() {
 
   // Intersection points

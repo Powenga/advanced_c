@@ -1,6 +1,8 @@
 #include <math.h>
 #include <stdio.h>
 
+#define EPS 0.0001
+
 typedef float (*function)(float);
 
 // Functions
@@ -54,15 +56,28 @@ float root_bin(function f, function g, float a, float b, float eps,
 
   while (fabs(a - b) > eps) {
     (*stepcount)++;
+
+    if (fabs(result_a) < eps) {
+      return a;
+    }
+
+    if (fabs(result_b) < eps) {
+      return b;
+    }
+
     c = (a + b) / 2.0;
     result_c = f(c) - g(c);
+
+    if (fabs(result_c) < eps) {
+      return c;
+    }
 
     // Корень слева, знак изменился
     if (result_a * result_c < 0) {
       b = c;
       result_b = result_c;
     } else {
-      // Корень справа
+      // Корень слева
       a = c;
       result_a = result_c;
     }
@@ -72,14 +87,32 @@ float root_bin(function f, function g, float a, float b, float eps,
   ;
 };
 
+float root_chord(function f, function g, float a, float b, float eps,
+                 int *stepcount) {
+  {
+    *stepcount = 0;
+    while (fabs(f(a) - f(b)) > eps) {
+      (*stepcount)++;
+      float h_a = f(a) - g(a);
+      float h_b = f(b) - g(b);
+      a = b - (b - a) * h_b / (h_b - h_a);
+      b = a - (a - b) * h_a / (h_a - h_b);
+    }
+  }
+  return b;
+}
+
 float integral(function f, float a, float b, float eps);
 
 int main() {
   int stepcount1 = 0;
   int stepcount2 = 0;
-  float root1 = root_simple(f1, f2, 2, 4, 0.001, &stepcount1);
+  int stepcount3 = 0;
+  float root1 = root_simple(f1, f2, 2, 4, EPS, &stepcount1);
   printf("%.7f %d\n", root1, stepcount1);
-  float root2 = root_bin(f1, f2, 2, 4, 0.001, &stepcount2);
+  float root2 = root_bin(f1, f2, 2, 4, EPS, &stepcount2);
   printf("%.7f %d\n", root2, stepcount2);
+  float root3 = root_chord(f1, f2, 2, 4, EPS, &stepcount3);
+  printf("%.7f %d\n", root3, stepcount3);
   return 0;
 }
